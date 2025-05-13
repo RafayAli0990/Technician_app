@@ -1,0 +1,153 @@
+<NoentryTab>
+
+    rows: 11
+    id: ped_grid
+    pos_hint: { "right": 1, "top": 1}
+    row_force_default: True
+    row_default_height: 50
+    size_hint: (None, None)
+    size: (300, 800)
+
+    # grid row 1
+    MDLabel:
+        id: row_1
+        text: "Select the area / line you want to mark:\n"
+        padding_x: '10dp'
+        font_style: "Title"
+        pos_hint: { "right": 1, "top": 1}               
+        size_hint: (None, None)
+        size: (280,30)
+
+    # grid row 2
+    # Vehicle tracking zone
+    BoxLayout:
+        id: row_2
+        orientation: "horizontal"    
+
+        MDCheckbox:
+            id: chk_vehicle_tracking
+            size_hint: (None, 1)                    
+            width: 40
+            group: "area"
+            active: True
+
+        MDLabel:                                    
+            halign: 'left'                                     
+            text: "vehicle tracking"                    
+            font_style: "Body"
+
+        MDRoundFlatIconButton:                                       
+            text: "Clear"
+            icon: "delete"
+            pos_hint: {"center_y": .5}
+            on_press: root.clear_area('vehicle_tracking')
+        
+        MDLabel: 
+            text: ""
+            size_hint_x: None
+            width: 40
+
+    # No_entry_zone grid line
+    BoxLayout:
+        orientation: "horizontal"    
+        
+        MDCheckbox:
+            id: chk_No_entry_zone
+            size_hint: (None, 1)                    
+            width: 40
+            group: "area"                  
+
+        MDLabel:
+            text: "Noentry zone"
+            font_style: "Body"
+
+        MDRoundFlatIconButton:
+            text: "Clear"
+            icon: "delete"
+            pos_hint: {"center_y": .5}
+            on_press: root.clear_area('No_entry_zone')
+
+        MDLabel: 
+            text: ""
+            size_hint_x: None
+            width: 40
+
+    # LPR-line grid line
+    BoxLayout:
+        orientation: "horizontal"    
+        
+        MDCheckbox:
+            id: chk_lpr_noentry
+            size_hint: (None, 1)                    
+            width: 40
+            group: "area"                  
+
+        MDLabel:
+            text: "lpr line"
+            font_style: "Body"
+
+        MDRoundFlatIconButton:
+            text: "Clear"
+            icon: "delete"
+            pos_hint: {"center_y": .5}
+            on_press: root.clear_area('lpr')
+
+        MDLabel: 
+            text: ""
+            size_hint_x: None
+            width: 40
+
+
+    # grid row 4
+    # entry line
+    BoxLayout:
+        orientation: "horizontal"    
+        
+        MDCheckbox:
+            id: chk_entry_line
+            size_hint: (None, 1)                    
+            width: 40
+            group: "area"
+            active: True
+        MDLabel:
+            text: "entry line"
+            font_style: "Body"
+
+        MDRoundFlatIconButton:
+            text: "Clear"
+            icon: "delete"
+            pos_hint: {"center_y": .5}
+            on_press: root.clear_area('entry_line')
+
+        MDLabel: 
+            text: ""
+            size_hint_x: None
+            width: 40    
+
+    # grid row 5
+    # Exit line
+    BoxLayout:
+        orientation: "horizontal"    
+        
+        MDCheckbox:
+            id: chk_exit_line
+            size_hint: (None, 1)        
+            width: 40
+            group: "area"
+            active : True
+            
+        MDLabel:
+            text: "exit line"
+            font_style: "Body"
+
+        MDRoundFlatIconButton:
+            text: "Clear"
+            icon: "delete"
+            pos_hint: {"center_y": .5}
+            on_press: root.clear_area('exit_line')
+
+        MDLabel: 
+            text: ""
+            size_hint_x: None
+            width: 40
+

@@ -1,0 +1,14 @@
+QLabel#searchIconLabel {
+  background: url("res/ico/search.svg"); }
+
+QWidget#searchBarParent {
+  padding: 5px; }
+
+QWidget#searchBar {
+  background: #3c3c3c;
+  border: 1px solid #6f6f6f; }
+
+QLineEdit#searchBarLineEdit {
+  background: transparent;
+  color: #DDDDDD;
+  border: none; }

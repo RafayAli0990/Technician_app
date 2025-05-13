@@ -1,0 +1,35 @@
+# lst[-1] should give the default value
+# lst[0] should give the var_type
+# lst[1] should be access level
+# lst[2] should be hint text
+# lst[3...n-1] should have all the possible options - TODO: make it as a list and use lst[3] directly
+ZONES_FILE: [str, LDMS Zone file,"zones_ldms.txt"]
+LABEL:
+  DEVICE_ID: [str, "technician", "Unique Device ID", "12345"]
+  HEIGHT: [int, "Label height drawn in violation image", 80]
+  PLACE: [str, "technician", "Device location", "Al Quoz"]
+  RADAR_ID: [str, "technician", "Unique RADAR ID", "00097523774"]
+  DIRECTION: [str, "technician", "Direction", "Approaching"]
+  SITECODE: [str, "technician", "Unique site identifier code", "12345"]
+  NAME: [str, "technician", "Customized name to be mentioned in violation LABEL", "LDMS_NAME"]
+LOG_LEVEL: [str, "DEBUG"]
+OCR: [bool, "Switch ANPR - ON/OFF", true, false, false]
+MESSENGER: [str, "Sending violation through messenger", "rabbitmq", "zeromq", "rabbitmq"]
+UPLOAD:
+  MONITOR_API_URL: [str, "URL for Health Monitor", "http://172.31.61.200/DeviceMonitor/api/monitor"]
+  FTP:
+    ENABLED: [str, "false"]
+    HOST: [str, "ktcsupport.dyndns.org"]    
+    PASSWORD: [str,"DevServer01"]
+    PORT: [str,'21']
+    REMOTE_FOLDER: [str,"PED_VIOLATIONS"]
+    USER: [str, "Admin1"]
+  HTTP:
+    ENABLED: [str, "technician",true, false, true]
+    URL: [str,"http://192.168.204.38/ktc_receive_pms.php"]
+  TMP_ZIP_FOLDER: [str,"/srv/ldms/tmp"]
+VIDEO_OUTPUT:
+  FORMAT: [str, "XVID"]
+  DURATION: [int, 10]
+  FOLDER: [str, "/home/nvidia/violations/ldms"]
+  WIDTH: [int, 1920]

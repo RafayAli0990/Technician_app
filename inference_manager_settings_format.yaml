@@ -1,0 +1,112 @@
+GLOBAL:
+  LOG_LEVEL: [str, "INFO"]
+INPUT:
+  LOG_LEVEL: [str, "INFO"]
+  INPUT_1:
+    ENABLE: [bool, True]
+    TYPE: [str, technician, Input mode, "CAMERA_RTSP_1", "FILE_ANY_1", "CAMERA_V4L2_1", "FOLDER_IMAGE_ANY_1", "CAMERA_RTSP_1"]
+    FRAME_RESOLUTION: [str, "1920X1080"]
+    FPS: [int, 30]
+    COMPRESSION: [bool, True]
+    ADDITIONAL_CONFIG:
+      URI: [str, technician, "Camera stream URL", "rtsp://{user}:{pass}@{ip}:554/Streaming/Channels/1/", "rtsp://{user}:{pass}@{ip}:554/cam/realmonitor?channel=1&subtype=0", "rtsp://admin:Support01@192.168.51.220:554/cam/realmonitor?channel=1&subtype=0"]
+      COMPRESSION_TECHNIQUE: [str, "H264"]
+  INPUT_2:
+    ENABLE: [bool, False]
+    TYPE: [str, "FILE_ANY_1"]
+    FPS: [int, 30]
+    FRAME_RESOLUTION: [str, "1920X1080"]
+    ADDITIONAL_CONFIG:
+      URI: [str, "file:///home/nvidia/ped_violation.mp4"]
+  INPUT_3:
+    ENABLE: [bool, False]
+    TYPE: [str, "CAMERA_RTSP_1"]
+    FRAME_RESOLUTION: [str, "1920X1080"]
+    FPS: [int, 30]
+    COMPRESSION: [bool, True]
+    ADDITIONAL_CONFIG:
+      URI: [str, "rtsp://127.0.0.1:8555/mkvstream"]  # "rtsp://192.168.1.10:8547/channel/1"
+      COMPRESSION_TECHNIQUE: [str, "H264"]
+  INPUT_4:
+    ENABLE: [bool, False]
+    TYPE: [str, "FILE_ANY_1"]
+    FRAME_RESOLUTION: [str, "1920X1080"]
+    ADDITIONAL_CONFIG:
+      URI: [str, "/home/nvidia/2.mkv"]
+  INPUT_5:
+    ENABLE: [bool, False]
+    TYPE: [str, "CAMERA_V4L2_1"]
+    FPS: [int, 5]
+    FRAME_RESOLUTION: [str, "1920X1080"]
+    ADDITIONAL_CONFIG:
+      URI: [str, "/dev/video0"]
+PREPROCESS:
+  PREPROCESS_1:
+    ENABLE: [bool, True]
+    TYPE: [str, "STREAMMUX_1"]
+    FRAME_RESOLUTION: [str, "1920X1080"]
+    LIVE_INPUT_FEED: [bool, True]
+    ADDITIONAL_CONFIG:
+      APPEND_QUEUE: [bool, True]
+INFERENCE:
+  INFERENCE_1: # COCO
+    ENABLE: [bool, True]
+    TYPE: [str, "PGIE_1"]
+    ADDITIONAL_CONFIG:
+      MODEL_PATH: [str, "/srv/inferencemanager_venv/lib/python3.8/site-packages/inferencemanagerktc/models/yolov5s_coco.onnx"]
+      LABELS: [list, ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush']]
+      MAINTAIN_ASPECT_RATIO: [bool, True]
+      NMS_IOU_THRESHOLD: [float, 0.45]
+      TOPK: [int, 15]
+  INFERENCE_2: # PMS_Mobile
+    ENABLE: [bool, False]
+    TYPE: [str, "PGIE_1"]
+    ADDITIONAL_CONFIG:
+      MODEL_PATH: [str, "/srv/inferencemanager_venv/lib/python3.8/site-packages/inferencemanagerktc/models/mobile_v8.2641.300.v7_s_pretrained.onnx"] # mobile_v6.2641.300.v7_s.onnx
+      LABELS: [list, ['belt', 'no belt', 'mobile', 'vehicle', 'steering wheel']]
+      MAINTAIN_ASPECT_RATIO: [bool, True]
+      NMS_IOU_THRESHOLD: [float, 0.45]
+      TOPK: [int, 15]
+TRACKER:
+  TRACKER_1:
+    ENABLE: [bool, True]
+    TYPE: [str, "DEFAULT_1"]
+    ADDITIONAL_CONFIG:
+      TRACKER_WIDTH: [int, 640]
+      TRACKER_HEIGHT: [int, 384]
+      MIN_TRACKER_CONFIDENCE: [float, 0.7]
+      MIN_TARGET_BBOX_SIZE: [int, 5]
+POSTPROCESS:
+  LOG_LEVEL: [str, "INFO"]
+  POSTPROCESS_1:
+    ENABLE: [bool, True]
+    TYPE: [str, "VIDEOCONVERT_1"]
+    APPEND_CAPS_AT_END: [bool, True]
+    ADDITIONAL_CONFIG:
+      CAPS_OUT_MEDIATYPE: [str, "VIDEO"]
+      CAPS_OUT_MEMORY: [str, "NVIDIA"]
+      CAPS_OUT_FORMAT: [str, "RGBA"]
+OUTPUT:
+  LOG_LEVEL: [str, "INFO"]
+  OUTPUT_1:
+    ENABLE: [bool, False]
+    TYPE: [str, "SCREEN_1"]
+    ADDITIONAL_CONFIG:
+      CALCULATE_FPS: [bool, True]
+      TILER_QUEUE: [bool, False]
+      OSD_QUEUE: [bool, False]
+      TILER_RESOLUTION: [str, 1280X720]
+      TILER_ROWS: [int, 1]
+      TILER_COLUMNS: [int, 1]
+  OUTPUT_2:
+    ENABLE: [bool, False]
+    TYPE: [str, "COCOJSON_1"]
+    ADDITIONAL_CONFIG:
+      CALCULATE_FPS: [bool, True]
+      COCO_JSON_OUTPUT_PATH: [str, "out2.json"]
+      COCO_JSON_OUTPUT_SAVE_INTERVAL_SECONDS: [int, 60]
+  OUTPUT_3:
+    ENABLE: [bool, True]
+    TYPE: [str, "FUNCTIONCALLBACK_1"]
+    ADDITIONAL_CONFIG:
+      CALCULATE_FPS: [bool, True]

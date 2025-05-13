@@ -1,0 +1,230 @@
+#:kivy 2.0
+<LdmsTab>
+    rows: 11
+    id: ldms_grid
+    pos_hint: { "right": 1, "top": 1}
+    row_force_default: True
+    row_default_height: 50
+    size_hint: (None, None)
+    size: (300, 800)
+
+    # grid row 1
+    MDLabel:
+        id: row_1
+        text: "Select the area / line you want to mark:\n"
+        padding_x: '10dp'
+        font_style: "Title"
+        pos_hint: { "right": 1, "top": 1}               
+        size_hint: (None, None)
+        size: (280,30)
+
+    # grid row 2
+    # Vehicle tracking zone
+    BoxLayout:
+        id: row_2
+        orientation: "horizontal"
+        MDCheckbox:
+            id: chk_vehicle_tracking_ldms
+            size_hint: (None, 1)                    
+            width: 40
+            group: "area"
+            active: True
+
+        MDLabel:                                    
+            halign: 'left'                                     
+            text: "vehicle tracking"                    
+            font_style: "Body"
+
+        MDRoundFlatIconButton:                                       
+            text: "Clear"
+            icon: "delete"
+            pos_hint: {"center_y": .5}
+            on_press: root.clear_area('vehicle')
+        
+        MDLabel: 
+            text: ""
+            size_hint_x: None
+            width: 40
+
+    # grid row 3
+    # left area
+    BoxLayout:
+        orientation: "horizontal"    
+        id: row_3
+        MDCheckbox:
+            id: chk_Left
+            size_hint: (None, 1)                    
+            width: 40
+            group: "area"
+            active: True
+        MDLabel:
+            text: "left area"
+            font_style: "Body"
+
+        MDRoundFlatIconButton:
+            text: "Clear"
+            icon: "delete"
+            pos_hint: {"center_y": .5}
+            on_press: root.clear_area('left')
+
+        MDLabel: 
+            text: ""
+            size_hint_x: None
+            width: 40
+
+    # grid row 4
+    # Right area
+    BoxLayout:
+        orientation: "horizontal"    
+        id: row_4
+        MDCheckbox:
+            id: chk_Right
+            size_hint: (None, 1)                    
+            width: 40
+            group: "area"
+            active: True
+        MDLabel:
+            text: "right area"
+            font_style: "Body"
+
+        MDRoundFlatIconButton:
+            text: "Clear"
+            icon: "delete"
+            pos_hint: {"center_y": .5}
+            on_press: root.clear_area('right')
+
+        MDLabel: 
+            text: ""
+            size_hint_x: None
+            width: 40
+
+    # grid row 5
+    # Right hatched
+    BoxLayout:
+        orientation: "horizontal"    
+        id: row_5
+        MDCheckbox:
+            id: chk_Righth
+            size_hint: (None, 1)                    
+            width: 40
+            group: "area"
+            active: True
+        MDLabel:
+            text: "right hatched"
+            font_style: "Body"
+
+        MDRoundFlatIconButton:
+            text: "Clear"
+            icon: "delete"
+            pos_hint: {"center_y": .5}
+            on_press: root.clear_area('righth')
+
+        MDLabel: 
+            text: ""
+            size_hint_x: None
+            width: 40
+
+
+    # grid row 6
+    # Middle line 
+    BoxLayout:
+        orientation: "horizontal"
+        id: row_6
+        MDCheckbox:
+            id: chk_Middle
+            size_hint: (None, 1)                    
+            width: 40
+            group: "area"                  
+        MDLabel:
+            text: "middle line"
+            font_style: "Body"
+
+        MDRoundFlatIconButton:
+            text: "Clear"
+            icon: "delete"
+            pos_hint: {"center_y": .5}
+            on_press: root.clear_area('middle')
+
+        MDLabel: 
+            text: ""
+            size_hint_x: None
+            width: 40
+
+    # grid row 7
+    # Trajectory axis line
+    BoxLayout:
+        orientation: "horizontal"    
+        id: row_7
+        MDCheckbox:
+            id: chk_Trajectory
+            size_hint: (None, 1)        
+            width: 40
+            group: "area"
+            
+        MDLabel:
+            text: "trajectory axis"
+            font_style: "Body"
+
+        MDRoundFlatIconButton:
+            text: "Clear"
+            icon: "delete"
+            pos_hint: {"center_y": .5}
+            on_press: root.clear_area('trajectory')
+
+        MDLabel: 
+            text: ""
+            size_hint_x: None
+            width: 40
+
+    # grid row 8
+    # LPR line
+    BoxLayout:
+        orientation: "horizontal"    
+        id: row_8
+        MDCheckbox:
+            id: chk_LPR
+            size_hint: (None, 1)        
+            width: 40
+            group: "area"
+            
+        MDLabel:
+            text: "lpr line"
+            font_style: "Body"
+
+        MDRoundFlatIconButton:
+            text: "Clear"
+            icon: "delete"
+            pos_hint: {"center_y": .5}
+            on_press: root.clear_area('lpr')
+
+        MDLabel: 
+            text: ""
+            size_hint_x: None
+            width: 40
+    
+    # grid row 9
+    # LPR poly line
+    BoxLayout:
+        orientation: "horizontal"    
+        id: row_9
+        
+        MDCheckbox:
+            id: chk_lprpoly
+            size_hint: (None, 1)        
+            width: 40
+            group: "area"
+            
+        MDLabel:
+            text: "lpr poly"
+            font_style: "Body"
+
+        MDRoundFlatIconButton:
+            text: "Clear"
+            icon: "delete"
+            pos_hint: {"center_y": .5}
+            on_press: root.clear_area('lprpoly')
+
+        MDLabel: 
+            text: ""
+            size_hint_x: None
+            width: 40

@@ -1,0 +1,26 @@
+<RCC>
+  <qresource>
+    <file alias="add_new_device.png">icons/add_new_device.png</file>
+    <file>icons/configure_icon.png</file>
+    <file>icons/configure_icon.svg</file>
+    <file>icons/smart_icon.png</file>
+    <file>icons/connect_icon.png</file>
+    <file>icons/connect_icon.svg</file>
+    <file>icons/flash_icon.png</file>
+    <file>icons/flash_icon.svg</file>
+    <file>icons/remove_device.png</file>
+    <file>icons/reset_config_icon.png</file>
+    <file>icons/reset_config_icon.svg</file>
+    <file>icons/restart_icon.png</file>
+    <file>icons/restart_icon.svg</file>
+    <file>icons/search_icon_2.png</file>
+    <file>icons/search_icon.png</file>
+    <file>icons/search_icon.svg</file>
+    <file>icons/select_multiple.png</file>
+    <file>Login_Backgroudn.jpg</file>
+  </qresource>
+  <qresource prefix="Login_background">
+    <file>resources.qrc</file>
+    <file>icons/Login_Background.jpg</file>
+  </qresource>
+</RCC>

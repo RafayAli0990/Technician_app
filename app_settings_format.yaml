@@ -1,0 +1,163 @@
+# lst[-1] should give the default value
+# lst[0] should give the var_type
+# lst[1] should be access level
+# lst[2] should be hint text
+# lst[3...n-1] should have all the possible options - TODO: make it as a list and use lst[3] directly
+AUTOSTART:
+  MOBILE: [bool, technician, Switch MOBILE detection ON/OFF, True, False, True]
+  PEDESTRIAN: [bool, technician, Switch PEDESTRIAN detection ON/OFF, True, False, True]
+  SEATBELT: [bool, technician, Switch SEATBELT detection ON/OFF, True, False, True]
+  TINT: [bool, technician, Switch TINT detection ON/OFF, True, False, False]
+SCHEDULER:
+  ENABLE: [bool, technician, Switch ENABLE SCHEDULER ON/OFF,True, False, False]
+  MOBILE: [str, technician, write timings MOBILE from/to, "08:00-17:00"]
+  NOBELT: [str, technician, write timings NOBELT from/to,"08:00-17:00"]
+  TINT: [str, technician, write timings TINT from/to,"09:00-12:00,14:00-16:00"]
+DEEPSORT:
+  MAX_AGE: [int, 20]
+  MAX_DIST: [float, 0.2]
+  MAX_IOU_DISTANCE: [float, 0.7]
+  MIN_CONFIDENCE: [float, 0.3]
+  NMS_MAX_OVERLAP: [float, 0.5]
+  NN_BUDGET: [int, 100]
+  N_INIT: [int, 3]
+  REID_CKPT: [str, deep_sort_pytorch/deep_sort/deep/checkpoint/ckpt.t7]
+DETECTIONS:
+  CONF_THRES: [float, 0.3]
+  DEVICE: [str, "0"]
+  IOU_THRES: [float, 0.4]
+  MOBI:
+    USE_LEFT_EDGE: [bool, True, False, False] # when flag is set, then left edge of the vieport will be used to capture 2nd frame.
+    USE_EDGE: [str, "left"]
+    IMG_SIZE: [int, 640]
+    WEIGHTS: [str, "weights/mobile_v6.2641.300.v7.pt"] #weights/mobile_v6.2641.300.pt
+    ZONES_FILE: [str, "Zone file location for MOBILE/SEATBELT detection", "config/zones_mobile.txt"]
+    CONF_THRES: [float, 0.3]
+  PED:
+    IMG_SIZE: [int, 640]
+    WEIGHTS: [str, "weights/yolov5s.pt"]
+    ZONES_FILE: [str, Zone file location for PEDESTRIAN detection, "config/zones_ajman_ped.txt"]
+    CONF_THRES: [float, 0.7]
+  LDMS:
+    IMG_SIZE: [int, 640]
+    WEIGHTS: [str, "weights/yolov5s.pt"]
+    ZONES_FILE: [str, "config/zones_ldms.txt"]
+    CONF_THRES: [float, 0.3]
+  NOPARKING:
+    USE_LEFT_EDGE: [bool, True, False, True] # when flag is set, then left edge of the vieport will be used to capture 2nd frame.
+    USE_EDGE: [str, '']
+    IMG_SIZE: [int, 640]
+    WEIGHTS: [str, "weights/yolov5s.pt"]
+    ZONES_FILE: [str, "config/zones_dms10_new_noparking_lpr.txt"]
+    CONF_THRES: [float, 0.3]
+  NOENTRY:
+    USE_LEFT_EDGE: [bool, True, False, True] # when flag is set, then left edge of the vieport will be used to capture 2nd frame.
+    USE_EDGE: [str, "right"]
+    IMG_SIZE: [int, 640]
+    WEIGHTS: [str, "weights/yolov5s.pt"]
+    ZONES_FILE: [str, "config/zones_dms05_noentry.txt"]
+    CONF_THRES: [float, 0.3]
+  TRIGGER_ALARM_THRESH: [int, technician, Trigger alarm threshold timing, "3","0","3"]
+OCR: [bool, Switch ANPR - ON/OFF, True, False, True]
+UPLOAD:  
+  MONITOR_API_URL: [str, URL for Health Monitor, "http://10.171.156.220/DeviceMonitorApi/api/monitor"]
+  TMP_ZIP_FOLDER: [str, "/srv/pms/detect/tmp"]
+  MODE: [str, technician, Upload violations mode, 'NONE', 'HTTP', 'FTP', 'LOCAL', 'NONE']  # Can be NONE, HTTP, FTP, LOCAL
+  HTTP:
+    URL: [str, "http://192.168.201.38/ktc_receive_pms.php"]
+  FTP:
+    HOST: [str,  "ktcsupport.dyndns.org"]
+    MOBILE_REMOTE_FOLDER: [str, "MOB_VIOLATIONS"]
+    PASSWORD: [str, "DevServer01"]
+    PORT: [str, '21']
+    REMOTE_FOLDER: [str, "PED_VIOLATIONS"]
+    USER: [str, "Admin1"]
+LABEL:
+  DEVICE_ID: [str, Unqiue Device ID, '117220']
+  HEIGHT: [int, Label height drawn in violation image, 80]
+  PLACE: [str, technician, Device location, "Al Quozr"]
+  RADAR_ID: [str, technician, Unique RADAR ID, "00072227008"]
+  NAME: [str, technician, Customized name to be mentioned in violation LABEL, '']
+  SITECODE: [str, technician, Unique site identifier code, "11722r"]
+  DIRECTION: [str, technician, Direction, "Approaching", "Departing" ,"Approaching"]
+LOG_LEVEL: [str, "DEBUG"]
+VIDEO_OUTPUT:
+  RECORDINGS: [str, "/home/nvidia/pms/recordings"]
+  FORMAT: [str, "XVID"]
+  MOBI:
+    DURATION: [int, 12]
+    FOLDER: [str, "/home/nvidia/pms/mobile"]
+    WIDTH: [int, 1920]
+  PED:
+    DURATION: [int, 12]
+    FOLDER: [str, "/home/nvidia/pms/ped"]
+    WIDTH: [int, 1920]
+  TINT:
+    FOLDER: [str, "/home/nvidia/pms/tint"]
+  LDMS:
+    DURATION: [int, 12]
+    FOLDER: [str, r"F:\Pms\Detections"]
+    WIDTH: [int, 860]
+  NOPARKING:
+    DURATION: [int, 8]
+    FOLDER: [str, "E:/tmp/Detections"]
+    WIDTH: [int, 1440]        
+  NOENTRY:
+    DURATION: [int, 8]
+    FOLDER: [str, "D:/tmp"]
+    WIDTH: [int, 1440]    
+VIDEO_SOURCE:
+  MOBI:
+    FILE: [str, "/home/nvidia/1.mkv"]
+    IPCAM:
+      IP: [str, "192.168.1.20"]
+      PASSWORD: [str, "sunj0se68"]
+      USERNAME: [str, "camera1"]
+    TYPE: [str, "file"]
+  PED:
+    FILE: [str, "/home/nvidia/1.mkv"]
+    IPCAM:
+      IP: [str, "192.168.1.10"]
+      PASSWORD: [str, "pass"]
+      USERNAME: [str, "admin"]           # camera2
+    TYPE: [str, "file"]
+  LDMS:
+    FILE: [str, r"E:\source\repos\pedestrian-crossing\DetectViolations\data\video\ldms\right_zone_issue.mkv"]
+    IPCAM:
+      IP: [str, "192.168.1.10"]
+      PASSWORD: [str, "pass"]
+      USERNAME: [str, "camera1"]
+    TYPE: [str, "file"]
+  NOPARKING:
+    FILE: [str, r"F:\Projects\DMS\Detections\DMS10\No-parking\20230829\video_20230829_1200_cut.mp4"]
+    IPCAM:
+      IP: [str, "192.168.1.10"]
+      PASSWORD: [str, "pass"]
+      USERNAME: [str, "admin"]           # camera2
+    TYPE: [str, "file"]
+  NOENTRY:
+    FILE: [str, r"C:\Users\gbets\Desktop\DMS\Sites\No-parking_DMS10\recordings\video_20230807_1100.mkv"]
+    IPCAM:
+      IP: [str, "192.168.1.10"]
+      PASSWORD: [str, "pass"]
+      USERNAME: [str, "admin"]           # camera2
+    TYPE: [str, "file"]
+VIOLATION_IMAGE_COLLECTION:
+  ENABLE: [bool, technician, Switch to control - RAW image collection feature, True, False, True]
+  FOLDER: [str, "/home/nvidia/pms/violation_raw"]
+  CROP:
+    TOP: [str, "290"]
+    BOTTOM: [int, -1]
+    LEFT: [str, "0"]
+    RIGHT: [int, -1]
+  PED: 
+    ENABLE: [bool, technician, Switch to control - RAW image collection feature, True, False, True]
+    FOLDER: [str, "/home/nvidia/pms/violation_raw_ped"]
+    CROP:
+      TOP: [str, "290"]
+      BOTTOM: [int, -1]
+      LEFT: [str, "0"]
+      RIGHT: [int, -1]
+PLATE_DATA_COLLECTION:
+  ENABLE: [bool, True, False, False]
+  FOLDER: [str, "/home/nvidia/pms/plate_data_collection"]

@@ -1,0 +1,34 @@
+# lst[-1] should give the default value
+# lst[0] should give the var_type
+# lst[1] should be access level
+# lst[2] should be hint text
+# lst[3...n-1] should have all the possible options - TODO: make it as a list and use lst[3] directly
+ZONES_FILE: [str, LDMS Zone file,"zones_ldms.txt"]
+LABEL:
+  DEVICE_ID: [str, technician, Unqiue Device ID, '12345']
+  HEIGHT: [int, Label height drawn in violation image, 80]
+  PLACE: [str, technician, Device location, "Al Quozr"]
+  RADAR_ID: [str, Unique RADAR ID, '00097523774']
+  DIRECTION: [str, technician, Direction, 'Approaching']
+  SITECODE: [str, technician, Unique site identifier code,'12345']
+  NAME: [str,technician, Customized name to be mentioned in violation LABEL, 'LDMS_NAME']
+LOG_LEVEL: [str, 'DEBUG']
+OCR: [bool, Switch ANPR - ON/OFF, true, false, false]
+MESSENGER: [str, Sending violation throught messenger, 'rabbitmq', 'zeromq', 'rabbitmq']
+UPLOAD:
+  MONITOR_API_URL: [str, URL for Health Monitor, "http://172.31.61.200/DeviceMonitorApi/api/monitor"]
+VIDEO_OUTPUT:
+  FORMAT: [str, "XVID"]
+  DURATION: [int, 10]
+  FOLDER: [str, "/home/nvidia/violations/ldms"]
+  WIDTH: [int, 1920]
+SCHEDULER:
+  LDMS: 
+     TIME_RANGE: [str, technician, scheduling timings for detection, "00:01-23:59"]
+     CAMERA_URL: [str, technician,Camera url for using camera, "rtsp://admin:Support01@192.168.1.10"]
+     ZONES: [str, technician, Zones file can be fetched from here"/srv/configs/zones_ldms.txt"]
+     MIN_CAR_CONFIDENCE: [str, technician, minimum car confidence,"30"]
+
+
+
+

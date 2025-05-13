@@ -1,0 +1,62 @@
+#:kivy 2.0
+#:import PedTab baseclass.ped_tab.PedTab
+#:import MobileTab baseclass.mobile_tab.MobileTab
+#:import NoentryTab baseclass.noentry_tab.NoentryTab
+#:import LdmsTab baseclass.ldms_tab.LdmsTab
+
+<ConfigRootScreen>
+
+
+    MDBoxLayout:
+        orientation: "horizontal"
+        
+        Image:
+            id: video_img                           
+            name: 'source video frame' 
+            fit_mode: "fill"
+            pos_hint: {'top': 1}
+            size_hint: (None, None)
+            size: self.texture_size
+
+        MDBoxLayout:
+            orientation: "vertical"
+
+            MDTabs:
+                id: tabs            
+                on_tab_switch: root.on_tab_switch(*args)
+
+            MDBoxLayout:
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 1, 1  # blue
+                    Line:
+                        width: 1.
+                        rectangle: (self.x + 10, self.height, self.width - 20, 1)
+                    # Rectangle:
+                    #     pos: self.pos
+                    #     size: self.size
+
+                orientation: "horizontal"
+                size_hint: (None, None)
+                size: (320, 50)
+
+                MDLabel:
+                    text: ''
+
+                MDRoundFlatIconButton:                                 
+                    text: "Save"
+                    icon: "content-save"   
+                    pos_hint: {"center_x": .4, "center_y": .5}                                                                  
+                    on_press: root.save()
+
+                MDLabel:
+                    text: ''
+
+                MDRoundFlatIconButton:                                 
+                    text: "Exit"
+                    icon: "close-thick"                             
+                    pos_hint: {"center_x": .8, "center_y": .5}           
+                    on_press: root.exit_mdapp()
+
+                MDLabel:
+                    text: ''    

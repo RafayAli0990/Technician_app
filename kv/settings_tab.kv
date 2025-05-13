@@ -1,0 +1,18 @@
+<SettingsTab>
+    
+    # canvas.before:
+    #     Color:
+    #         rgba: 0.3, 0.69, 0.31, 1.0
+    #     Rectangle:
+    #         size: self.size
+    #         pos: self.pos
+    BoxLayout:
+        size: root.size
+        padding: "10dp"
+        ScrollView:
+            orientation: "vertical"
+            Dynamic_UI_update:
+                id: dynamic_ui_update
+                orientation: "vertical"
+                size_hint: 1, None
+                height: self.minimum_height
